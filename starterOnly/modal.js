@@ -18,12 +18,14 @@ const lastData = document.getElementById("last");
 const emailData = document.getElementById("email");
 const birthdate = document.getElementById("birthdate");
 const quantity = document.getElementById("quantity");
+const checkboxInput = document.querySelectorAll(".checkboxinput");
 
 const nomError = document.createElement("p");
 const nomError1 = document.createElement("p");
 const nomError2 = document.createElement("p");
 const nomError3 = document.createElement("p");
 const nomError4 = document.createElement("p");
+const nomError5 = document.createElement("p");
 
 
 
@@ -113,7 +115,19 @@ if (resultat === false) {
     }})
 // Ajout d'un écouteur d'événement sur le formulaire pour écouter le submit
 form.addEventListener("submit", (event) => {
-    
-   event.preventDefault()
-  
+  event.preventDefault()
+   for (let i = 0; i < checkboxInput.length; i++) {
+    let isAnyChecked = false;
+      if (checkboxInput[i].checked) {
+        isAnyChecked = true
+        nomError5.style.display = "none";
+        nomError5.classList.remove("nom-error")
+        break
+      } else {
+        nomError5.style.display = "block";
+        nomError5.textContent = "Veuillez choisir où participer ";
+        checkboxInput[5].parentElement.appendChild(nomError5);
+        nomError5.classList.add("nom-error")
+      }
+    }
 });
