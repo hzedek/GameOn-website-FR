@@ -33,7 +33,7 @@ let nomvalidation = true;
 let birthdayvalidation = true;
 let quantitevalidation = true;
 let emailvalidation = true;
-let villevalidation = true;
+let villevalidation = false;
 let conditionvalidation = false;
 
 
@@ -161,30 +161,42 @@ function quantite() {
 }
 
 function ville() {
-  checkboxInput.forEach((box) => box.addEventListener("click", (evento)=>{
-    let isAnyChecked = false;
-
-      if (evento.target.checked) {
-        isAnyChecked = true;
-        nomError5.style.display = "none";
-        nomError5.classList.remove("nom-error");
-        villevalidation=true;
-        console.log("true");
-                  
-      }
-      else {
-        nomError5.style.display = "block";
+  if (villevalidation === false) {
+    nomError5.style.display = "block";
       nomError5.textContent = "Veuillez choisir où participer";
       checkboxInput[5].parentElement.appendChild(nomError5);
       nomError5.classList.add("nom-error");
       isAnyChecked = false;
       villevalidation = false;
-      console.log(villevalidation,isAnyChecked);
-    }}))
+  }
+    
+  checkboxInput.forEach((box) => box.addEventListener("input", (evento)=>{
+    console.log(evento.target.checked);
+    let isAnyChecked = false;
+      if (evento.target.checked) {
+        isAnyChecked = true;
+        nomError5.style.display = "none";
+        nomError5.classList.remove("nom-error");
+        villevalidation=true;
+        console.log("true"); 
+      }
+      
+    }))
   };
 
 function condition() {
-checkbox1.addEventListener("input",e=>{
+  if (checkbox1.checked === false) {
+    nomError6.style.display = "block";
+    nomError6.textContent = "Veuillez accepter nos conditions ";
+    checkbox1.parentElement.appendChild(nomError6);
+    nomError6.classList.add("nom-error")
+    }
+    else {
+    nomError6.style.display = "none";
+    nomError6.classList.remove("nom-error");
+    conditionvalidation = true
+    }
+/*checkbox1.addEventListener('input',e=>{
   if (e.target.checked) {
   nomError6.style.display = "none";
   nomError6.classList.remove("nom-error");
@@ -196,19 +208,18 @@ checkbox1.addEventListener("input",e=>{
   checkbox1.parentElement.appendChild(nomError6);
   nomError6.classList.add("nom-error")
   conditionvalidation = false
-  }})}
-
-validate();
+  }})}*/}
 function validate() {
   prenom(),nom(),email(),birthday(),quantite(),ville(),condition()
 };
+
+
 
 // Appel de la Fonction
 
 // Ajout d'un écouteur d'événement sur le formulaire pour écouter le submit
 form.addEventListener("submit", (event) => {
   event.preventDefault();
-  validate()
   if (
     prenomvalidation && nomvalidation && emailvalidation && birthdayvalidation && quantitevalidation && villevalidation && conditionvalidation === true
     ) {
