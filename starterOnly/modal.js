@@ -47,6 +47,7 @@ closeBtn.forEach((btn) => btn.addEventListener("click", closeModal));
 function closeModal() {
   modalbg2.style.display = "none";
   modalbg.style.display = "none";
+  window.location.reload()
 }
 
 // launch modal form
@@ -166,19 +167,14 @@ function ville() {
       nomError5.textContent = "Veuillez choisir où participer";
       checkboxInput[5].parentElement.appendChild(nomError5);
       nomError5.classList.add("nom-error");
-      isAnyChecked = false;
       villevalidation = false;
   }
     
   checkboxInput.forEach((box) => box.addEventListener("input", (evento)=>{
-    console.log(evento.target.checked);
-    let isAnyChecked = false;
       if (evento.target.checked) {
-        isAnyChecked = true;
         nomError5.style.display = "none";
         nomError5.classList.remove("nom-error");
         villevalidation=true;
-        console.log("true"); 
       }
       
     }))
@@ -196,19 +192,7 @@ function condition() {
     nomError6.classList.remove("nom-error");
     conditionvalidation = true
     }
-/*checkbox1.addEventListener('input',e=>{
-  if (e.target.checked) {
-  nomError6.style.display = "none";
-  nomError6.classList.remove("nom-error");
-  conditionvalidation = true
-  }
-  else {
-  nomError6.style.display = "block";
-  nomError6.textContent = "Veuillez accepter nos conditions ";
-  checkbox1.parentElement.appendChild(nomError6);
-  nomError6.classList.add("nom-error")
-  conditionvalidation = false
-  }})}*/}
+}
 function validate() {
   prenom(),nom(),email(),birthday(),quantite(),ville(),condition()
 };
